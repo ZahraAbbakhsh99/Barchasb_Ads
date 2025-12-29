@@ -26,8 +26,8 @@ app.use('/uploads', express.static('uploads'));
 // Routes
 app.use('/api/ads/seller', require('./routes/SellerAdRoutes'));
 app.use('/api/ads/employer', require('./routes/EmployerAdRoutes'));
-app.use('/api/ads/jobseeker', require('./routes/JobSeekerRoutes'));
-app.use('/api/ads/digital', require('./routes/DigitalRoutes'));
+app.use('/api/ads/jobseeker', require('./routes/JobSeekerAdRoutes'));
+app.use('/api/ads/digital', require('./routes/DigitalAdRoutes'));
 app.use('/api/users', require('./routes/UserRoutes'));
 
 // Global Error Handler for Multer
