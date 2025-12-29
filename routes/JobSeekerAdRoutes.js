@@ -9,5 +9,7 @@ const seekerUpload = upload.fields([
 ]);
 
 router.post('/', seekerUpload, jobSeekerController.createJobSeekerAd);
+router.get('/', jobSeekerController.getAllJobSeekerAds); // Get List
+router.get('/:id', jobSeekerController.getJobSeekerAdById); // Get Detail
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const EmployerAd = require('../models/EmployerAd');
 
+// post employer ad
 exports.createEmployerAd = async (req, res) => {
     try {
         // Map images from Multer
@@ -24,5 +25,26 @@ exports.createEmployerAd = async (req, res) => {
         res.status(201).json(ad);
     } catch (err) {
         res.status(400).json({ error: err.message });
+    }
+};
+
+// Get all employer ads
+exports.getAllEmployerAds = async (req, res) => {
+    try {
+        const ads = await EmployerAd.find().populate('owner', 'fullName');
+        res.json(ads);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+// Get single employer ad
+exports.getEmployerAdById = async (req, res) => {
+    try {
+        const ad = await EmployerAd.findById(req.params.id).populate('owner', 'fullName phoneNumber');
+        if (!ad) return res.status(404).json({ message: "آگهی یافت نشد" });
+        res.json(ad);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 };
