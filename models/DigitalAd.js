@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const digitalAdSchema = new mongoose.Schema({
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    owner: { type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User', 
+        required: true,
+        index: true 
+    },
 
     // Media
     images: [{
@@ -37,10 +41,11 @@ const digitalAdSchema = new mongoose.Schema({
     adStatus: { 
         type: String, 
         enum: ['pending', 'approved', 'rejected'], 
-        default: 'pending' 
+        default: 'pending',
+        index: true // helps filter approved ads quickly
     },
 
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now, index: true }
 });
 
 // Standard Image Logic

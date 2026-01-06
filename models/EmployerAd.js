@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const employerAdSchema = new mongoose.Schema({
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    owner: { type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User', 
+        required: true,
+        index: true
+     },
     
     // Media
     images: [{
@@ -12,7 +16,7 @@ const employerAdSchema = new mongoose.Schema({
     // Basic Info
     name: { type: String, required: true },
     title: { type: String, required: true },
-    category: { type: String, required: true },
+    category: { type: String, required: true, index: true },
     
     // Job Details
     cooperationType: { type: String },
@@ -62,10 +66,11 @@ const employerAdSchema = new mongoose.Schema({
     adStatus: { 
         type: String, 
         enum: ['pending', 'approved', 'rejected'], 
-        default: 'pending' 
+        default: 'pending',
+        index: true
     },
 
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now, index: true}
 });
 
 employerAdSchema.pre('save', function (next) {

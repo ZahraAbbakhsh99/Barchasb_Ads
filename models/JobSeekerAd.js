@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const jobSeekerSchema = new mongoose.Schema({
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    owner: { type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User', 
+        required: true,
+        index: true
+     },
 
     // Media
     images: [{
@@ -18,9 +22,9 @@ const jobSeekerSchema = new mongoose.Schema({
     phoneNumber: { type: String, required: true },
 
     // Location & Category
-    state: { type: String },
-    city: { type: String },
-    category: { type: String, required: true },
+    state: { type: String, index: true },
+    city: { type: String, index: true },
+    category: { type: String, required: true, index: true },
 
     // Files (Paths/URLs to the files)
     resumeFile: { type: String }, // Path to PDF
@@ -59,10 +63,11 @@ const jobSeekerSchema = new mongoose.Schema({
     adStatus: { 
         type: String, 
         enum: ['pending', 'approved', 'rejected'], 
-        default: 'pending' 
+        default: 'pending',
+        index: true
     },
 
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now, index: true }
 });
 
 // Image Logic (Standardized)

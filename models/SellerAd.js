@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const sellerAdSchema = new mongoose.Schema({
     title: { type: String, required: true, trim: true },
-    category: { type: String, required: true }, 
-    state: { type: String, required: true },
-    city: { type: String, required: true },
+    category: { type: String, required: true, index: true}, 
+    state: { type: String, required: true, index: true },
+    city: { type: String, required: true, index: true },
     application: { type: String },
     status: { type: String },      // General status like "Used", "New"
 
@@ -13,7 +13,7 @@ const sellerAdSchema = new mongoose.Schema({
         isMain: { type: Boolean, default: false }
     }],
 
-    priceIRT: { type: Number, default: 0 },
+    priceIRT: { type: Number, default: 0, index: true },
     isFixedPrice: { type: Boolean, default: false },
     isNegotiable: { type: Boolean, default: false },
     hasWarranty: { type: Boolean, default: false },
@@ -36,10 +36,11 @@ const sellerAdSchema = new mongoose.Schema({
     adStatus: { 
         type: String, 
         enum: ['pending', 'approved', 'rejected'], 
-        default: 'pending' 
+        default: 'pending',
+        index: true 
     },
 
-    createdAt: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now, index: true},
 
     owner: {
         type: mongoose.Schema.Types.ObjectId,
