@@ -15,7 +15,10 @@ const digitalAdSchema = new mongoose.Schema({
 
     // Basic Info
     title: { type: String, required: true, trim: true },
-    description: { type: String, required: true },
+    descriptionItems: [{
+        title: { type: String },
+        content: { type: String }
+    }],
 
     // Budget (Stored as strings as per your preference)
     minBudget: { type: String },

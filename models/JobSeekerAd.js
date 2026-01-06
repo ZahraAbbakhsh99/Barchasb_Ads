@@ -32,7 +32,7 @@ const jobSeekerSchema = new mongoose.Schema({
 
     // Professional Details
     education: { type: String },
-    skills: { type: String },
+    skills: [{ type: String, index: true }],
     suggestedSalaryIRT: { type: String },
     aboutMe: { type: String },
 

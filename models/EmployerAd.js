@@ -16,8 +16,12 @@ const employerAdSchema = new mongoose.Schema({
     // Basic Info
     name: { type: String, required: true },
     title: { type: String, required: true },
-    category: { type: String, required: true, index: true },
-    
+    category: [{ type: String, required: true, index: true }],
+
+    // Location Fields
+    state: { type: String, required: true, index: true },
+    city: { type: String, required: true, index: true },
+
     // Job Details
     cooperationType: { type: String },
     gender: { type: String },
