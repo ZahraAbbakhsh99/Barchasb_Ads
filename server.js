@@ -10,13 +10,15 @@ const app = express();
 // Connect to Database
 connectDB();
 
-
 // Create Uploads Directory
 const uploadDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
     console.log('Created "uploads" folder');
 }
+
+const cors = require('cors');
+app.use(cors());
 
 // Middleware
 app.use(express.json());
