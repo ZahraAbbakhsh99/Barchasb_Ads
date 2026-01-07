@@ -65,7 +65,7 @@ exports.getAllDigitalAds = async (req, res) => {
             const now = new Date();
             if (time === 'امروز') {
                 queryCondition.createdAt = { $gte: new Date(now.setHours(0,0,0,0)) };
-            } else if (time === ' این هفته') {
+            } else if (time === 'این هفته') {
                 const lastWeek = new Date(now.setDate(now.getDate() - 7));
                 queryCondition.createdAt = { $gte: lastWeek };
             } else if (time === 'این ماه') {
@@ -73,6 +73,8 @@ exports.getAllDigitalAds = async (req, res) => {
                 queryCondition.createdAt = { $gte: lastMonth };
             }
         }
+        const totalAds = await DigitalAd.countDocuments(queryCondition);
+        
         const ads = await DigitalAd.find({ adStatus: 'approved' })
                     .select('title minBudget maxBudget images descriptionItems createdAt')
                     .sort({ createdAt: -1 }) // Newest first
